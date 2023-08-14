@@ -49,7 +49,7 @@ export default function Header() {
                   markedNavLink("/sign-in") && "border-b-4 border-b-[#DA4167]"
                 }`}
               >
-                <button className="bg-btnColor text-white font-bold py-2 px-4 rounded">
+                <button className="bg-btnColor text-white font-bold py-2 px-4 rounded hover:bg-hoverBtnColor transition duration-300 ease-in-out">
                   Sign In
                 </button>
               </li>

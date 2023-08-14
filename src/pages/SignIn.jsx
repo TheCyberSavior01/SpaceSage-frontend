@@ -3,12 +3,15 @@ import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { signIn } from "../firebase/firebase.auth";
+import { useStateValue } from "../provider/StateProvider";
+import { actionType } from "../provider/reducer";
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  const [{loading}, dispatch] = useStateValue();
 
   const handleSignIn = (e) => {
     e.preventDefault();
@@ -69,7 +72,7 @@ export default function SignIn() {
                 name="password"
                 id="password"
                 placeholder="Password"
-                className="w-full mb-5 transition ease-in-out rounded text-gray-500"
+                className="w-full mb-5 transition ease-in-out rounded text-gray-500 "
                 required
               />
               {showPassword ? (
@@ -94,7 +97,7 @@ export default function SignIn() {
                 {errorMessage}
               </span>
             )}
-            <button className="bg-btnColor text-white w-full py-2 rounded font-bold mt-5">
+            <button className="bg-btnColor text-white w-full py-2 rounded font-bold mt-5 hover:bg-hoverBtnColor transition duration-300 ease-in-out">
               Sign In
             </button>
           </form>

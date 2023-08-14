@@ -3,12 +3,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { createUser, logOut, setDisplayName } from "../firebase/firebase.auth";
 import { toast } from "react-toastify";
+import { useStateValue } from "../provider/StateProvider";
+import { actionType } from "../provider/reducer";
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  const [{ loading }, dispatch] = useStateValue();
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -22,7 +25,7 @@ export default function SignUp() {
       .then((result) => {
         updateDisplayName(name);
         logOut()
-          .then()
+          .then(() => {})
           .catch((error) => console.log(error));
         toast.success("Successfully Signed Up! Login to Continue", {
           position: "bottom-center",
@@ -38,10 +41,10 @@ export default function SignUp() {
       })
       .catch((error) => {
         const errMessage = error.message;
-        setShowError(true)
-        setErrorMessage(errMessage.substring(10, 50));
+        setShowError(true);
+        setErrorMessage(errMessage);
         setTimeout(() => {
-          setShowError(false)
+          setShowError(false);
         }, 5000);
       });
 
@@ -76,7 +79,7 @@ export default function SignUp() {
               name="name"
               id="name"
               placeholder="Name"
-              className="w-full mb-5 transition ease-in-out rounded text-gray-500"
+              className="w-full mb-5 transition duration-300 ease-in-out rounded text-gray-500"
               required
             />
             <input
@@ -84,7 +87,7 @@ export default function SignUp() {
               name="email"
               id="email"
               placeholder="Email address"
-              className="w-full mb-5 transition ease-in-out rounded text-gray-500"
+              className="w-full mb-5 transition duration-300 ease-in-out rounded text-gray-500"
               required
             />
             <div className="relative">
@@ -93,7 +96,7 @@ export default function SignUp() {
                 name="password"
                 id="password"
                 placeholder="Password"
-                className="w-full mb-5 transition ease-in-out rounded text-gray-500"
+                className="w-full mb-5 transition duration-300 ease-in-out rounded text-gray-500"
                 required
               />
               {showPassword ? (
@@ -113,9 +116,7 @@ export default function SignUp() {
                 className="mb-2 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
                 role="alert"
               >
-                <span className="block sm:inline">
-                  {errorMessage}
-                </span>
+                <span className="block sm:inline">{errorMessage}</span>
                 <span className="absolute top-0 bottom-0 right-0 px-4 py-3">
                   <svg
                     className="fill-current h-6 w-6 text-red-500"
@@ -129,7 +130,7 @@ export default function SignUp() {
                 </span>
               </div>
             )}
-            <button className="bg-btnColor text-white w-full py-2 rounded font-bold">
+            <button className="bg-btnColor text-white w-full py-2 rounded font-bold hover:bg-hoverBtnColor transition duration-300 ease-in-out">
               Sign Up
             </button>
           </form>

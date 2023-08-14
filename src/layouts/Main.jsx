@@ -9,7 +9,7 @@ import { actionType } from "../provider/reducer";
 const auth = getAuth(firebaseApp);
 
 export default function Main() {
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user, loading }, dispatch] = useStateValue();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (loggedUser) => {
@@ -27,6 +27,10 @@ export default function Main() {
           user: null,
         });
       }
+      dispatch({
+        type: actionType.SET_LOADING,
+        loading: false
+      });
     });
 
     return () => {

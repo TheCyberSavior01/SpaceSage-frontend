@@ -8,7 +8,10 @@ import {
 } from "firebase/auth";
 import firebaseApp from "./firebase.config";
 
+
 const auth = getAuth(firebaseApp);
+
+
 
 export const signIn = (email, password) => {
   return signInWithEmailAndPassword(auth, email, password);

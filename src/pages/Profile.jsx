@@ -37,40 +37,10 @@ export default function Profile() {
     if (userData.userName !== displayName && userData.userEmail !== email) {
       updateName(userData.userName);
       updateEmail(userData.userEmail);
-      toast.success("Name and Email Updated!", {
-        position: "bottom-center",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
     } else if (userData.userName !== displayName) {
       updateName(userData.userName);
-      toast.success("Name Updated!", {
-        position: "bottom-center",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
     } else if (userData.userEmail !== email) {
       updateEmail(userData.userEmail);
-      toast.success("Email Updated!", {
-        position: "bottom-center",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
     }
   };
 
@@ -79,14 +49,39 @@ export default function Profile() {
       displayName: name,
     };
     setDisplayName(profile)
-      .then(() => {})
-      .catch((error) => console.log(error));
+      .then(() => {
+        toast.success("Name Updated!", {
+          position: "bottom-center",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      })
+      .catch((error) => setErrMessage(error.message));
   };
 
   const updateEmail = (email) => {
     setEmail(email)
-      .then(() => {})
-      .then((error) => console.log(error));
+      .then(() => {
+        toast.success("Name Updated!", {
+          position: "bottom-center",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      })
+      .then((error) => {
+        const errMessage = error.message;
+        console.log("change email error: ", errMessage)
+      });
   };
 
   const handleCancel = () => {
