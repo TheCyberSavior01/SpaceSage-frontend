@@ -8,8 +8,9 @@ export default {
     extend: {
       colors: {
         btnColor: "#832161",
+        hoverBtnColor: "#c2318f",
       }
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/forms'),],
 }
