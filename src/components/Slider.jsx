@@ -7,8 +7,8 @@ export default function Slider() {
 
   return (
     <Carousel
-      className="rounded-xl h-[280px] lg:h-[300px]"
-      autoplay="true"
+      className="rounded-xl h-[250px] lg:h-[300px]"
+      autoplay={true}
     >
 
       {data.map((item) => (
